@@ -40,10 +40,6 @@ public class EmailServiceImpl implements IEmailService {
             log.info("OTP Email sent to: {}", to);
 
         } catch (MessagingException | MailException e) {
-            // MessagingException = something went wrong building the message.
-            // MailException = something went wrong actually transporting it (e.g. SMTP outage).
-            // Both must be handled the same way here: log it, never let it escape — this runs
-            // inside an @Async listener, so an uncaught exception has no one watching for it.
             log.error("Failed to send OTP email to {}: {}", to, e.getMessage());
         }
     }
