@@ -51,7 +51,7 @@ public class GlobalExceptionHandler {
     // Handle Token Refresh Errors (403 Forbidden)
     @ExceptionHandler(TokenRefreshException.class)
     public ResponseEntity<ApiErrorResponse> handleTokenRefreshException(TokenRefreshException ex) {
-        return buildResponse(HttpStatus.FORBIDDEN, ex.getMessage());
+        return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage());
     }
 
     // Handle Bad Credentials (Login fail)

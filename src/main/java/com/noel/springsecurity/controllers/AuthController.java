@@ -5,6 +5,7 @@ import com.noel.springsecurity.dto.response.ApiMessageResponse;
 import com.noel.springsecurity.dto.response.AuthResponse;
 import com.noel.springsecurity.dto.response.MfaChallengeResponse;
 import com.noel.springsecurity.dto.response.OtpResponse;
+import com.noel.springsecurity.exceptions.TokenRefreshException;
 import com.noel.springsecurity.services.IAuthService;
 import com.noel.springsecurity.utils.CookieUtil;
 import jakarta.validation.Valid;
@@ -93,7 +94,13 @@ public class AuthController {
 
     // refresh Token
     @PostMapping("/refresh")
-    public ResponseEntity<AuthResponse> refresh(@CookieValue(name = "refresh_token") String refreshToken) {
+    public ResponseEntity<AuthResponse> refresh(
+            @CookieValue(name = "refresh_token", required = false) String refreshToken
+    ){
+        if (refreshToken == null || refreshToken.isBlank()) {
+            throw new TokenRefreshException("Refresh token is missing");
+        }
+
         IAuthService.AuthResult result = authService.refreshToken(refreshToken);
         ResponseCookie newCookie = cookieUtil.createRefreshTokenCookie(result.refreshToken());
 
