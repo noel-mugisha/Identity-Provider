@@ -1,4 +1,4 @@
-# Enterprise Spring Boot Authentication Service
+# Enterprise Spring Authentication Service
 
 [![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=java)](https://www.oracle.com/java/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.8-6DB33F?style=flat-square&logo=spring-boot&logoColor=white)](https://spring.io/projects/spring-boot)
